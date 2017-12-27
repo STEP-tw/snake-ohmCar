@@ -5,10 +5,20 @@ let numberOfCols=120;
 
 let animator=undefined;
 
+const actionsAfterGameOver=function(){
+  let restartButton=document.getElementById('restart');
+  restartButton.style.visibility='visible';
+  restartButton.onclick=function(){location.reload();};
+  document.getElementById('gameOver').innerText='Game Over';
+};
+
 const animateSnake=function() {
   let oldHead=snake.getHead();
   let oldTail=snake.move();
   let head=snake.getHead();
+  if(head.y==-1&&head.direction=="north"){
+    actionsAfterGameOver();
+  };
   paintBody(oldHead);
   unpaintSnake(oldTail);
   paintHead(head);
@@ -22,14 +32,14 @@ const animateSnake=function() {
 const changeSnakeDirection=function(event) {
   switch (event.code) {
     case "KeyA":
-      snake.turnLeft();
-      break;
+    snake.turnLeft();
+    break;
     case "KeyD":
-      snake.turnRight();
-      break;
+    snake.turnRight();
+    break;
     case "KeyC":
-      snake.grow();
-      break;
+    snake.grow();
+    break;
     default:
   }
 }
@@ -55,6 +65,7 @@ const createFood=function(numberOfRows,numberOfCols) {
 }
 
 const startGame=function() {
+  document.getElementById('restart').style.visibility='hidden';
   createSnake();
   drawGrids(numberOfRows,numberOfCols);
   drawSnake(snake);

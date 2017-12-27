@@ -22,6 +22,9 @@ const animateSnake=function() {
   if(head.x==-1&&head.direction=="west"){
     actionsAfterGameOver();
   };
+  if(head.y==60&&head.direction=="south"){
+    actionsAfterGameOver();
+  };
   paintBody(oldHead);
   unpaintSnake(oldTail);
   paintHead(head);

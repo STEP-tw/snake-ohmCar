@@ -9,7 +9,7 @@ const actionsAfterGameOver=function(){
   let restartButton=document.getElementById('restart');
   restartButton.style.visibility='visible';
   restartButton.onclick=function(){location.reload();};
-  document.getElementById('grid').innerText='Game Over';
+  document.getElementById('gameOver').innerText='Game Over';
 };
 
 const animateSnake=function() {

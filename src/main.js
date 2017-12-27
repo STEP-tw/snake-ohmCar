@@ -10,6 +10,7 @@ const actionsAfterGameOver=function(){
   restartButton.style.visibility='visible';
   restartButton.onclick=function(){location.reload();};
   document.getElementById('gameOver').innerText='Game Over';
+  clearInterval(animator);
 };
 
 const animateSnake=function() {
@@ -22,12 +23,12 @@ const animateSnake=function() {
   if(head.x==-1&&head.direction=="west"){
     actionsAfterGameOver();
   };
-  if(head.y==60&&head.direction=="south"){
+  if(head.y==numberOfRows&&head.direction=="south"){
     actionsAfterGameOver();
   };
-  if(head.x==120&&head.direction=="east"){
+  if(head.x==numberOfCols&&head.direction=="east"){
     actionsAfterGameOver();
-  };
+  }
   paintBody(oldHead);
   unpaintSnake(oldTail);
   paintHead(head);

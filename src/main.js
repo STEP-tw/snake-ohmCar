@@ -1,7 +1,10 @@
 let snake=undefined;
 let food=undefined;
+let count=1;
 let numberOfRows=60;
 let numberOfCols=120;
+
+let bodyPos=[];
 
 let animator=undefined;
 
@@ -13,10 +16,7 @@ const actionsAfterGameOver=function(){
   clearInterval(animator);
 };
 
-const animateSnake=function() {
-  let oldHead=snake.getHead();
-  let oldTail=snake.move();
-  let head=snake.getHead();
+const gameOver=function(head){
   if(head.y==-1&&head.direction=="north"){
     actionsAfterGameOver();
   };
@@ -28,12 +28,20 @@ const animateSnake=function() {
   };
   if(head.x==numberOfCols&&head.direction=="east"){
     actionsAfterGameOver();
-  }
+  };
+};
+
+const animateSnake=function() {
+  let oldHead=snake.getHead();
+  let oldTail=snake.move();
+  let head=snake.getHead();
+  gameOver(head);
   paintBody(oldHead);
   unpaintSnake(oldTail);
   paintHead(head);
   if(head.isSameCoordAs(food)) {
     snake.grow();
+    count++;
     createFood(numberOfRows,numberOfCols);
     drawFood(food);
   }
@@ -49,6 +57,7 @@ const changeSnakeDirection=function(event) {
     break;
     case "KeyC":
     snake.grow();
+    count++;
     break;
     default:
   }

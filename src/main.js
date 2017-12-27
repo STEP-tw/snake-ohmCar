@@ -9,7 +9,7 @@ const actionsAfterGameOver=function(){
   let restartButton=document.getElementById('restart');
   restartButton.style.visibility='visible';
   restartButton.onclick=function(){location.reload();};
-  document.getElementById('gameOver').innerText='Game Over';
+  document.getElementById('grid').innerText='Game Over';
 };
 
 const animateSnake=function() {
@@ -17,6 +17,9 @@ const animateSnake=function() {
   let oldTail=snake.move();
   let head=snake.getHead();
   if(head.y==-1&&head.direction=="north"){
+    actionsAfterGameOver();
+  };
+  if(head.x==-1&&head.direction=="west"){
     actionsAfterGameOver();
   };
   paintBody(oldHead);
